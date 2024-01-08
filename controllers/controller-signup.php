@@ -1,5 +1,5 @@
 <?php
-include_once 'view-signup.php';
+
 
 // Vérifier si le formulaire a été validé
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,23 +14,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Valider les champs
     $erreurs = array();
 
-    if (empty($nom) || !ctype_alpha($nom)) {
+    if (empty($nom)) {
+        $erreurs[] = "Nom obligatoire";
+    } else if (!ctype_alpha($nom)) {
         $erreurs[] = "Le nom est invalide.";
     }
 
-    if (empty($prenom) || !ctype_alpha($prenom)) {
+    if (empty($prenom)) {
+        $erreurs[] = "Prénom obligatoire";
+    } else if (!ctype_alpha($prenom)) {
         $erreurs[] = "Le prénom est invalide.";
-    }
+    };
 
-    if (empty($courriel) || !filter_var($courriel, FILTER_VALIDATE_EMAIL)) {
+    if (empty($courriel)) {
+        $erreurs[] = "Courriel obligatoire";
+    } else if (!filter_var($courriel, FILTER_VALIDATE_EMAIL)) {
         $erreurs[] = "L'adresse e-mail est invalide.";
-    }
+    };
 
     if (empty($date_naissance)) {
         $erreurs[] = "La date de naissance est obligatoire.";
     }
 
-    if (empty($mot_de_passe) || strlen($mot_de_passe) < 8 || $mot_de_passe !== $conf_mot_de_passe) {
+    if (empty($mot_de_passe)) {
+        $erreurs[] = "Mot de passe obligatoire";
+    } else if (strlen($mot_de_passe) < 8 || $mot_de_passe !== $conf_mot_de_passe) {
         $erreurs[] = "Le mot de passe est invalide.";
     }
 
@@ -50,6 +58,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>document.getElementById('formulaire').style.display='none';</script>";
     }
 }
-?>
 
-
+include_once '../views/view-signup.php';
