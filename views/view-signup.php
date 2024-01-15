@@ -30,8 +30,8 @@
                 <p class="error"><?= $erreurs["conf_mot_de_passe"] ?? '' ?></p>
                 <select id="choix_entreprise" name="choix_entreprise" required>
                     <option value="" disabled selected>Sélectionnez une entreprise</option>
-                    <option value="entreprise1" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == 'entreprise1' ? 'selected' : '' ?>>InnoTech Solutions</option>
-                    <option value="entreprise2" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == 'entreprise2' ? 'selected' : '' ?>>EcoFoods Distribution</option>
+                    <option value="1" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == '1' ? 'selected' : '' ?>>InnoTech Solutions</option>
+                    <option value="2" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == '2' ? 'selected' : '' ?>>EcoFoods Distribution</option>
                 </select>
                 <p class="error"><?= $erreurs["choix_entreprise"] ?? '' ?></p>
                 <label>
