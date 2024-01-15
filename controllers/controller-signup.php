@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_naissance = htmlspecialchars($_POST['date_naissance']);
     $mot_de_passe = htmlspecialchars($_POST['mot_de_passe']);
     $conf_mot_de_passe = htmlspecialchars($_POST['conf_mot_de_passe']);
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $choix_entreprise = htmlspecialchars($_POST['choix_entreprise']);
 
     // Valider les champs
     if (!isset($_POST['cgu'])) {
@@ -44,6 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if (strlen($mot_de_passe) < 8 || $mot_de_passe !== $conf_mot_de_passe) {
         $erreurs["mot_de_passe"] = "Le mot de passe est invalide.";
     }
+
+    if (empty($pseudo)) {
+        $erreurs["pseudo"] = "Pseudo obligatoire";
+    } else if (!ctype_alpha($pseudo) < 8 || $pseudo !== $pseudo) {
+        $erreurs["pseudo"] = "Le pseudo est invalide.";
+    }
+
+    if (empty($choix_entreprise)) {
+        $erreurs["choix_entreprise"] = "Veuillez choisir une entreprise";
+    } 
     // Si il n'y a pas d'erreurs
     if (empty($erreurs)) {
         echo "<div style='display: flex; align-items: center; justify-content: center; height: 100vh;'>";
