@@ -1,4 +1,7 @@
 <?php
+
+require_once '../config.php';
+
 $showform = true;
 // Vérifier si le formulaire a été validé
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,11 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
 
-            $dbName = 'metro_boulot_dodo';
-            $dbUser = 'ecoride';
-            $dbPassword = 'ecoride';
             // Conexion à la base de données
-            $db = new PDO("mysql:host=localhost;dbname=$dbName", $dbUser, $dbPassword);
+            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Stockage de la requete dans variable
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $query->bindValue(':valide_participant', 1, PDO::PARAM_INT);
 
             $query->execute();
-            
+
         } catch (PDOException $e) {
             echo 'Erreur :' . $e->getMessage();
             die();
