@@ -14,7 +14,7 @@
         
         <div id="formulaire">
             <form action="controller-signup.php" method="post" novalidate>
-            <h1>Formulaire d'inscription :</h1>
+            <h1>Formulaire d'inscription</h1>
                 <input type="text" id="nom" name="nom" placeholder="Nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required>
                 <p class="error"><?= $erreurs["nom"] ?? '' ?></p>
                 <input type="text" id="prenom" name="prenom" placeholder="Prénom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" required>

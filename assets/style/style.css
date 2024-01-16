@@ -12,6 +12,8 @@
 h1 {
     text-align: center;
     color: white;
+    text-decoration: overline;
+    
 }
 
 form {
@@ -65,7 +67,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #237e44;
 }
 
 p.error {
