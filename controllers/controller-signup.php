@@ -1,6 +1,7 @@
 <?php
 
 require_once '../config.php';
+require_once '../models/Utilisateur.php';
 
 $showform = true;
 // Vérifier si le formulaire a été validé
@@ -16,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conf_mot_de_passe = htmlspecialchars($_POST['conf_mot_de_passe']);
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $choix_entreprise = htmlspecialchars($_POST['choix_entreprise'] ?? '');
+    $valide_participant = 1;
 
     // Valider les champs
     if (!isset($_POST['cgu'])) {
@@ -62,36 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si il n'y a pas d'erreurs
     if (empty($erreurs)) {
 
+        Utilisateur::create($nom, $prenom, $pseudo, $date_naissance, $courriel, $mot_de_passe, $choix_entreprise, $valide_participant);
 
-        try {
-
-            // Conexion à la base de données
-            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Stockage de la requete dans variable
-            $sql = "INSERT INTO utilisateur (nom_participant, prenom_participant, pseudo_participant, naissance_participant, mail_participant, mdp_participant, id_entreprise, valide_participant)
-            VALUES (:lastname, :firstname, :pseudo, :birthdate, :email, :mdp, :id_entreprise, :valide_participant)";
-
-            // Préparation de la requète
-            $query = $db->prepare($sql);
-
-            // Relier les valeurs aux marqueurs nominatifs
-            $query->bindValue(':lastname', $nom, PDO::PARAM_STR);
-            $query->bindValue(':firstname', $prenom, PDO::PARAM_STR);
-            $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-            $query->bindValue(':birthdate', $date_naissance, PDO::PARAM_STR);
-            $query->bindValue(':email', $courriel, PDO::PARAM_STR);
-            $query->bindValue(':mdp', password_hash($mot_de_passe, PASSWORD_DEFAULT), PDO::PARAM_STR);
-            $query->bindValue(':id_entreprise', $choix_entreprise, PDO::PARAM_STR);
-            $query->bindValue(':valide_participant', 1, PDO::PARAM_INT);
-
-            $query->execute();
-
-        } catch (PDOException $e) {
-            echo 'Erreur :' . $e->getMessage();
-            die();
-        }
 
         // Inclure la connexion à la base de données
         // $sql_entreprise = 'SELECT * FROM `entreprise`';
@@ -118,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p>Courriel: <span>$courriel</span></p>";
         echo "<p>Date de naissance: <span>$date_naissance</span></p>";
         echo "<p>Entreprise: <span>$choix_entreprise</span></p>";
+        echo "<button class='btn'>Connexion</button>";
         echo "</div>";
         // Cacher le formulaire 
         $showform = false;
