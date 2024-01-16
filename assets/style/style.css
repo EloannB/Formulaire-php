@@ -1,7 +1,9 @@
 #formulaire {
     max-width: 400px;
     margin: 50px auto;
-    background-color: #fff;
+    background-image: url("../../pexels-fwstudio-172289.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -9,7 +11,7 @@
 
 h1 {
     text-align: center;
-    color: #333;
+    color: white;
 }
 
 form {
@@ -28,6 +30,19 @@ input[type="checkbox"] {
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+input:focus {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+input::placeholder {
+    color: #000000;
+}
+
+#choix_entreprise {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 label {
@@ -35,11 +50,11 @@ label {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    color: #555;
+    color: white;
 }
 
 button {
-    background-color: #007bff;
+    background-color: #206D3C;
     color: #fff;
     padding: 15px;
     border: none;
@@ -82,4 +97,20 @@ p.error {
 .user-summary span {
     font-weight: bold;
     color: #000000;
+}
+
+a.button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+a.button:hover {
+    background-color: #0056b3;
 }

@@ -81,22 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // var_dump($result);
 
-
-
-        echo "<div style='display: flex; align-items: center; justify-content: center; height: 100vh;'>";
-        echo "<div class='user-summary' style='border: 1px solid #ccc; padding: 20px; max-width: 400px;'>";
-        echo "<p style='color:green;'>Inscription réussie ! Un mail de confirmation a été envoyé.</p>";
-        echo "<p>Nom: <span>$nom</span></p>";
-        echo "<p>Prénom: <span>$prenom</span></p>";
-        echo "<p>Pseudo: <span>$pseudo</span></p>";
-        echo "<p>Courriel: <span>$courriel</span></p>";
-        echo "<p>Date de naissance: <span>$date_naissance</span></p>";
-        echo "<p>Entreprise: <span>$choix_entreprise</span></p>";
-        echo "<button class='btn'>Connexion</button>";
-        echo "</div>";
+       
         // Cacher le formulaire 
         $showform = false;
-        echo "</div>";
     }
 }
 
