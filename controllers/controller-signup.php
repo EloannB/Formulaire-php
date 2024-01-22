@@ -40,7 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erreurs["courriel"] = "Courriel obligatoire";
     } else if (!filter_var($courriel, FILTER_VALIDATE_EMAIL)) {
         $erreurs["courriel"] = "L'adresse e-mail est invalide.";
-    };
+    } else if (utilisateur::checkMailExists($_POST["courriel"])){
+        $erreurs["courriel"] = 'Mail déja utilisé';
+    }
 
     if (empty($date_naissance)) {
         $erreurs["date_naissance"] = "La date de naissance est obligatoire.";
@@ -56,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erreurs["pseudo"] = "Pseudo obligatoire";
     } else if (strlen($pseudo) < 4) {
         $erreurs["pseudo"] = "Le pseudo est invalide. Il doit contenir au moins 4 caractères.";
+    } else if (utilisateur::checkPseudoExists($_POST["pseudo"])){
+        $erreurs["pseudo"] = 'Pseudo déja utilisé';
     }
 
     if (empty($choix_entreprise)) {
