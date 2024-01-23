@@ -13,11 +13,14 @@
     <div id="home">
         <h1>Bienvenue sur la page HOME</h1>
         <p>Date du jour : <?php echo date('Y-m-d'); ?></p>
-        <p>Pseudo de l'utilisateur : <?php echo $_SESSION['pseudo_participant']; ?></p>
-        <img src="" alt="Image de profil">
-        <button>Ajouter un trajet écologique</button>
-        <a href="controller-logout.php">Déconnexion</a>
+        <div class="user-info">
+            <p>Pseudo : <?php echo $_SESSION['user']['pseudo_participant']; ?></p>
+            <img src="/pexels-fwstudio-172289.jpg" alt="Image de profil">
+        </div>
+        <button class="add-trip-btn">Ajouter un trajet écologique</button>
+        <a href="controller-logout.php" class="logout-link">Déconnexion</a>
     </div>
+
 
 </body>
 

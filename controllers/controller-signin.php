@@ -10,69 +10,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $erreurs = array();
 
-    $courriel = htmlspecialchars($_POST['courriel']);
-    $mot_de_passe = htmlspecialchars($_POST['mot_de_passe']);
 
-    if (empty($erreurs["courriel"])) {
-        try {
-            // Création d'un objet $db selon la classe PDO
-            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
-            // Définir le mode d'erreur sur exception
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // On regarder si les champs sont vides
+    if (empty($_POST["courriel"])) {
+        $erreurs['courriel'] = "Mail obligatoire.";
+    }
 
-            // Utilisation de requêtes préparées pour éviter les injections SQL
-            $sqlMdpUtilisateur = "SELECT * FROM utilisateur WHERE courriel = ?";
-            $query = $db->prepare($sqlMdpUtilisateur);
+    if (empty($_POST["mot_de_passe"])) {
+        $erreurs['mot_de_passe'] = "Mot de passe obligatoire.";
+    }
 
-            // Liaison des paramètres et exécution de la requête
-            $query->bindParam(1, $courriel, PDO::PARAM_STR);
-            $query->execute();
+    if (empty($erreurs)) {
+        $courriel = htmlspecialchars($_POST['courriel']);
+        $mot_de_passe = htmlspecialchars($_POST['mot_de_passe']);
 
-            // Récupération du résultat de la requête
-            $resultat = $query->fetch(PDO::FETCH_ASSOC);
+        if (Utilisateur::checkMailExists($courriel)) {
+            $utilisateurInfos = Utilisateur::getInfos($courriel);
 
-            // Vérification du mot de passe à l'aide de password_verify
-            if ($resultat) {
-                // Récupération du mot de passe haché depuis la base de données
-                $mot_de_passe_bdd = $resultat['mot_de_passe'];
-
-                // Vérification du mot de passe à l'aide de password_verify
-                if (password_verify($mot_de_passe, $mot_de_passe_bdd)) {
-
-                    $_SESSION["user"] = $resultat;
-                    unset($_SESSION["user"]["Mot_de_passe"]);
-
-                    // Rediriger vers la page d'accueil
-                    header("Location: ../controllers/controller-home.php");
-                    exit();
-                } else {
-                    // Mot de passe incorrect
-                    if (empty($_POST["mot_de_passe"])) {
-                        $erreurs['mot_de_passe'] = "Champs obligatoire.";
-                    } else if ($_POST["mot_de_passe"]) {
-                        $erreurs['mot_de_passe'] = "Mot de passe incorrect.";
-                    }
-                }
+            // On vérifie le mot de passe
+            if (password_verify($mot_de_passe, $utilisateurInfos['mdp_participant'])) {
+                $_SESSION['user'] = $utilisateurInfos;
+                header('Location: controller-home.php');
+                exit(); // Assurez-vous de terminer le script après une redirection
             } else {
-                // Aucun utilisateur trouvé avec cette adresse mail
-                if (empty($_POST["courriel"])) {
-                    $erreurs['courriel'] = "Champs obligatoire.";
-                } else if ($_POST["courriel"]) {
-                    $erreurs['courriel'] = "Le nom est invalide.";
-                }
+                $erreurs['mot_de_passe'] = "Mot de passe incorrect.";
             }
-
-            // Fermeture de la requête préparée
-            $query->closeCursor();
-        } catch (PDOException $e) {
-            // Gestion des erreurs de connexion
-            $erreurs[] = "Erreur de connexion à la base de données : " . $e->getMessage();
-        } finally {
-            // Fermeture de la connexion à la base de données
-            $db = null;
+        } else {
+            $erreurs['courriel'] = "Adresse mail incorrecte.";
         }
     }
+
 }
+
 
 
 
