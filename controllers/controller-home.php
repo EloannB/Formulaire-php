@@ -2,9 +2,20 @@
 
 require_once '../config.php';
 require_once '../models/Utilisateur.php';
-// controller-home.php
+
 
 session_start();
+
+// Vérifier si le formulaire de déconnexion a été soumis
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    // Détruire toutes les variables de session
+    session_unset();
+    // Détruire la session
+    session_destroy();
+    // Rediriger vers la page de connexion
+    header('Location: controller-signin.php');
+    exit();
+}
 
 // Vérifiez si l'utilisateur est connecté en vérifiant la présence de la variable de session 'id_utilisateur'
 if (!isset($_SESSION['user'])) {
