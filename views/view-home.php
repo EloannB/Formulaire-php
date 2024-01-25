@@ -17,7 +17,7 @@
             <img src="/pexels-fwstudio-172289.jpg" alt="Image de profil">
         </div>
         <button class="add-profil" onclick="location.href='controller-profil.php';">Voir le Profil</button>
-        <button class="add-btn">Ajouter un trajet écologique</button>
+        <a href="../controllers/controller-trajet.php"><button class="add-btn">Ajouter un trajet écologique</button></a>
         
         <!-- Ajouter le formulaire de déconnexion -->
         <form method="post" style="display:inline;">
