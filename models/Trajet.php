@@ -14,8 +14,7 @@ class Trajet
      * @return void 
      */
 
-    public static function ajouterTrajet
-    (
+    public static function ajouterTrajet(
         string $dateTrajet,
         string $distanceParcourue,
         string $dureeTrajet,
@@ -27,7 +26,7 @@ class Trajet
             // Création d'un objet $db selon la classe PDO
             $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
 
-            $sql = "INSERT INTO `trajet`(`date_trajet`, `distance_trajet`, `temps_trajet`, `photo_trajet`, `id_transport`, `id_utilisateur`) VALUES (:date_trajet,:distance_trajet,:temps_trajet,:photo_trajet,:id_transport,:id_utilisateur);";
+            $sql = "INSERT INTO `trajet`(`date_trajet`, `distance_trajet`, `temps_trajet`, `photo_trajet`, `id_transport`, `id_utilisateur`) VALUES (:date_trajet,:distance_trajet,:temps_trajet,:photo_trajet,:id_vehicule,:id_utilisateur);";
 
             $query = $db->prepare($sql);
 
@@ -40,14 +39,12 @@ class Trajet
 
             // on execute la requête
             $query->execute();
-
-
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
             die();
         }
-
     }
+
     public static function historiqueTrajet($idUtilisateur)
     {
         try {
@@ -66,7 +63,6 @@ class Trajet
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
-
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
             die();

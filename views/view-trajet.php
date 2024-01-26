@@ -13,16 +13,16 @@
         <form class="formTrajet" action="../controllers/controller-trajet.php" method="post"
             enctype="multipart/form-data">
             <label for="date_trajet" id="dateT">Date du trajet:</label>
-            <input type="datetime-local" id="dateTrajet" name="dateTrajet" required>
+            <input type="datetime-local" id="dateTrajet" name="date_trajet" required>
 
             <label for="distance_trajet" id="distanceT">Distance parcourue (en km):</label>
-            <input type="number" step="0.10" id="distanceParcourue" name="distanceParcourue" required>
+            <input type="number" step="0.10" id="distanceParcourue" name="distance_trajet" required>
 
             <label for="temps_trajet" id="tempsT">Durée du trajet:</label>
-            <input type="time" id="dureeTrajet" name="dureeTrajet" required>
+            <input type="time" id="dureeTrajet" name="temps_trajet" required>
 
             <label for="id_vehicule" id="vehiculeT">Vehicule</label>
-            <select id="idVehicule" name="idVehicule" required>
+            <select id="idVehicule" name="id_vehicule" required>
                 <option value="" disabled selected>Choisir un moyen de transport</option>
                 <option value="1" <?php if (!empty($idVehicule) && $idVehicule == "Velo") {
                     echo "Velo";
@@ -48,7 +48,7 @@
             </span>
 
             <label for="photo_trajet" id="photoT">Image du trajet (optionnel):</label>
-            <input type="file" id="imageTrajet" name="imageTrajet" accept="image/*">
+            <input type="file" id="imageTrajet" name="photo_trajet" accept="image/*">
 
 
 
