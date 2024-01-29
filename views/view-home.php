@@ -12,12 +12,13 @@
 
     <div id="home">
         <h1>Bonjour <?php echo $_SESSION['user']['pseudo_participant']; ?></h1>
-        <p>Date du jour : <?php echo date('Y-m-d'); ?></p>
+        <p>Date du jour : <?php echo date('d/m/Y'); ?></p>
         <div class="user-info">
             <img src="/pexels-fwstudio-172289.jpg" alt="Image de profil">
         </div>
         <button class="add-profil" onclick="location.href='controller-profil.php';">Voir le Profil</button>
         <a href="../controllers/controller-trajet.php"><button class="add-btn">Ajouter un trajet écologique</button></a>
+        <a href="../controllers/controller-history.php"><button class="add-btn">Voir historique des trajets</button></a>
         
         <!-- Ajouter le formulaire de déconnexion -->
         <form method="post" style="display:inline;">

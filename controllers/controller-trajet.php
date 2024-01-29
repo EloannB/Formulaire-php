@@ -8,6 +8,7 @@ require_once "../config.php";
 require_once "../models/Utilisateur.php";
 require_once "../models/Trajet.php";
 
+$showform = true;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
     // Récupérer les données du formulaire
@@ -28,12 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idUtilisateur
     );
 
+    $showform = false;
     // Utilisation d'une session pour stocker le message
-    $_SESSION['message'] = "Le trajet a été enregistré avec succès.";
+    // $_SESSION['message'] = "Le trajet a été enregistré avec succès.";
 
     // Redirection après traitement
-    header("Location: ../controllers/controller-home.php");
-    exit();
+    // header("Location: ../controllers/controller-home.php");
+    // exit();
 }
 
 include("../views/view-trajet.php");

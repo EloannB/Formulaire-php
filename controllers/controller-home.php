@@ -1,10 +1,11 @@
 <?php
+session_start();
 
 require_once '../config.php';
 require_once '../models/Utilisateur.php';
+require_once "../models/Trajet.php";
 
 
-session_start();
 
 // Vérifier si le formulaire de déconnexion a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {

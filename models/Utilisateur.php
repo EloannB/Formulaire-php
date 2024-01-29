@@ -1,6 +1,7 @@
 <?php
 
-class Utilisateur {
+class Utilisateur
+{
 
     /**
      * Méthode permettant de créer un utilisateur
@@ -15,7 +16,8 @@ class Utilisateur {
      * 
      * @return void
      */
-    public static function create(string $nom, string $prenom, string $pseudo, string $date_naissance, string $courriel, string $mot_de_passe, string $choix_entreprise, int $valide_participant){
+    public static function create(string $nom, string $prenom, string $pseudo, string $date_naissance, string $courriel, string $mot_de_passe, string $choix_entreprise, int $valide_participant)
+    {
         try {
 
             // Conexion à la base de données
@@ -46,7 +48,7 @@ class Utilisateur {
         }
     }
 
- /**
+    /**
      * Methode permettant de vérifier si un mail existe dans la base de donnée
      * 
      * @param string $email Adresse mail de l'utilisateur
@@ -142,7 +144,7 @@ class Utilisateur {
             $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
 
             // stockage de ma requete dans une variable
-            $sql = "SELECT * FROM `utilisateur` WHERE `mail_participant` = :mail";
+            $sql = "SELECT * FROM `utilisateur` NATURAL JOIN `entreprise` WHERE `mail_participant` = :mail";
 
             // je prepare ma requête pour éviter les injections SQL
             $query = $db->prepare($sql);
@@ -164,4 +166,83 @@ class Utilisateur {
         }
     }
 
+    /**
+     * Methode permettant de récupérer le nom des entreprises selon l'id
+     * 
+     * @param string $choix_entreprise Id de l'entreprise de l'utilisateur
+     * 
+     * @return array Tableau associatif contenant les infos de l'entreprise
+     */
+    public static function getEntrepriseName(string $choix_entreprise): string
+    {
+        try {
+            // Création d'un objet $db selon la classe PDO
+            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
+
+            // stockage de ma requete dans une variable
+            $sql = "SELECT `nom_entreprise` FROM `entreprise` WHERE `id_entreprise` = :id_entreprise";
+
+            // je prepare ma requête pour éviter les injections SQL
+            $query = $db->prepare($sql);
+
+            // on relie les paramètres à nos marqueurs nominatifs à l'aide d'un bindValue
+            $query->bindValue(':id_entreprise', $choix_entreprise, PDO::PARAM_STR);
+
+            // on execute la requête
+            $query->execute();
+
+            // on récupère le résultat de la requête dans une variable
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            // on retourne le résultat
+            return $result['nom_entreprise'];
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
+
+    public static function updateUserProfile($utilisateur_id, $nomEntreprise, $pseudo, $nom, $prenom, $adresseMail, $dateNaissance, $user_description)
+    {
+        try {
+            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
+
+            $sql = "UPDATE utilisateur SET id_entreprise = :nomEntreprise, pseudo_participant = :pseudo, nom_participant = :nom, prenom_participant = :prenom, mail_participant = :adresseMail, naissance_participant = :dateNaissance, user_description = :user_description WHERE id_utilisateur = :utilisateur_id";
+
+            $query = $db->prepare($sql);
+
+            $query->bindParam(":id_entreprise", $nomEntreprise, PDO::PARAM_STR);
+            $query->bindParam(":pseudo", $pseudo, PDO::PARAM_STR);
+            $query->bindParam(":nom", $nom, PDO::PARAM_STR);
+            $query->bindParam(":prenom", $prenom, PDO::PARAM_STR);
+            $query->bindParam(":adresseMail", $adresseMail, PDO::PARAM_STR);
+            $query->bindParam(":dateNaissance", $dateNaissance, PDO::PARAM_STR);
+            $query->bindParam(":user_description", $user_description, PDO::PARAM_STR);
+            $query->bindParam(":id_utilisateur", $utilisateur_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
+
+    public static function updateUserProfileImage($utilisateur_id, $image_path)
+    {
+        try {
+            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
+
+            $sql = "UPDATE utilisateur SET photo = :image_path WHERE id_utilisateur = :id_utilisateur";
+
+            $query = $db->prepare($sql);
+
+            $query->bindParam(":image_path", $image_path, PDO::PARAM_STR);
+            $query->bindParam(":id_utilisateur", $utilisateur_id, PDO::PARAM_INT);
+
+            $query->execute();
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
 }

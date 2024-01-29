@@ -11,9 +11,15 @@ if (!isset($_SESSION['user'])) {
     header("Location: controller-signin.php");
     exit();
 }
-
 // Récupérer les informations de l'utilisateur depuis la session
 $user = $_SESSION['user'];
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    echo "ok";
+}
+
 
 
 include_once '../views/view-profil.php';

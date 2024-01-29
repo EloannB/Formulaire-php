@@ -45,13 +45,13 @@ class Trajet
         }
     }
 
-    public static function historiqueTrajet($idUtilisateur)
+    public static function getHistoriqueTrajet($idUtilisateur)
     {
         try {
             // Création d'un objet $db selon la classe PDO
             $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
 
-            $sql = "SELECT * FROM `trajet` WHERE `id_utilisateur` = :id_utilisateur";
+            $sql = "SELECT * , DATE_FORMAT(date_trajet, '%d/%m/%Y') AS date_fr FROM `trajet` WHERE `id_utilisateur` = :id_utilisateur";
 
             $query = $db->prepare($sql);
 
