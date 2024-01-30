@@ -7,6 +7,7 @@ session_start();
 require_once "../config.php";
 require_once "../models/Utilisateur.php";
 require_once "../models/Trajet.php";
+require_once '../models/Entreprise.php';
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user']['id_utilisateur'];
 
     // Récupérer les données du formulaire
-    $nomEntreprise = $_POST['nom_entreprise'];
+    $nomEntreprise = $_POST['choix_entreprise'];
     $pseudo = $_POST['pseudo'];
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES["profile_image"]) && $_FILES["profile_image"]["error"] == 0) {
         $target_dir = "../assets/uploads/";
         $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
+        var_dump($target_file);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -42,13 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file)) {
                 // Mettre à jour le chemin de l'image dans la base de données
-                Utilisateur::updateUserProfileImage($user_id, $target_file);
+                Utilisateur::updateUserProfileImage($user_id, $_FILES["profile_image"]["name"]);
             }
         }
     }
 
     // Mettre à jour les informations du profil
     Utilisateur::updateUserProfile($user_id, $nomEntreprise, $pseudo, $nom, $prenom, $adresseMail, $dateNaissance, $description);
+
+    $_SESSION ['user'] = Utilisateur::getInfos($adresseMail);
 }
 
 // Rediriger vers la page de profil

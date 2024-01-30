@@ -11,10 +11,10 @@
 <body>
 
     <?php if ($showform) { ?>
-        
+
         <div id="formulaire">
             <form action="controller-signup.php" method="post" novalidate>
-            <h1>Formulaire d'inscription</h1>
+                <h1>Formulaire d'inscription</h1>
                 <input type="text" id="nom" name="nom" placeholder="Nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required>
                 <p class="error"><?= $erreurs["nom"] ?? '' ?></p>
                 <input type="text" id="prenom" name="prenom" placeholder="Prénom" value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>" required>
@@ -31,8 +31,9 @@
                 <p class="error"><?= $erreurs["conf_mot_de_passe"] ?? '' ?></p>
                 <select id="choix_entreprise" name="choix_entreprise" required>
                     <option value="" disabled selected>Sélectionnez une entreprise</option>
-                    <option value="1" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == '1' ? 'selected' : '' ?>>InnoTech Solutions</option>
-                    <option value="2" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == '2' ? 'selected' : '' ?>>EcoFoods Distribution</option>
+                    <?php foreach (Entreprise::getAllEntreprise() as $entreprise) { ?>
+                        <option value="<?= $entreprise['id_entreprise'] ?>" <?= isset($_POST['choix_entreprise']) && $_POST['choix_entreprise'] == $entreprise['id_entreprise'] ? 'selected' : '' ?>><?= $entreprise['nom_entreprise'] ?></option>
+                    <?php } ?>
                 </select>
                 <p class="error"><?= $erreurs["choix_entreprise"] ?? '' ?></p>
                 <label>

@@ -20,7 +20,7 @@
 
         <div id="profileInfo" class="user-profile">
             <p class="profile-info-item">Nom de l'Entreprise: <?php echo $_SESSION['user']['nom_entreprise']; ?></p>
-            <img src="<?php echo isset($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : '/pexels-fwstudio-172289.jpg'; ?>" alt="Photo de profil" class="profile-image">
+            <img src="<?php echo isset($_SESSION['user']['image_path']) ? $_SESSION['user']['image_path'] : '/pexels-fwstudio-172289.jpg'; ?>" alt="Photo de profil" class="profile-image">
             <p class="profile-info-item">Pseudo: <?php echo $_SESSION['user']['pseudo_participant']; ?></p>
             <p class="profile-info-item">Nom: <?php echo $_SESSION['user']['nom_participant']; ?></p>
             <p class="profile-info-item">Prénom: <?php echo $_SESSION['user']['prenom_participant']; ?></p>
@@ -34,8 +34,13 @@
 
         <!-- Formulaire de mise à jour du profil -->
         <form id="updateProfileForm" action="controller-updateprofil.php" method="post" enctype="multipart/form-data">
-            <label for="nom_entreprise" class="formul-label">Nom de l'Entreprise :</label>
-            <input type="text" id="nom_entreprise" name="nom_entreprise" value="<?php echo $_SESSION['user']['nom_entreprise']; ?>" class="form-input">
+            <label for="choix_entreprise" class="formul-label">Nom de l'Entreprise :</label>
+            <select id="choix_entreprise" name="choix_entreprise" class="select-input" required>
+                <option value="" disabled selected>Sélectionnez une entreprise</option>
+                <?php foreach (Entreprise::getAllEntreprise() as $entreprise) { ?>
+                    <option value="<?= $entreprise['id_entreprise'] ?>" <?= isset($_SESSION['user']['id_entreprise']) && $_SESSION['user']['id_entreprise'] == $entreprise['id_entreprise'] ? 'selected' : '' ?>><?= $entreprise['nom_entreprise'] ?></option>
+                <?php } ?>
+            </select>
 
             <label for="pseudo" class="formul-label">Pseudo :</label>
             <input type="text" id="pseudo" name="pseudo" value="<?php echo $_SESSION['user']['pseudo_participant']; ?>" class="form-input">

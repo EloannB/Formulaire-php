@@ -55,6 +55,7 @@
 
 
             <button type="submit">Ajouter</button>
+            <a href="controller-home.php" class="profile-info-link">Retour</a>
         </form>
     </div>
     <?php } else { ?>

@@ -166,42 +166,6 @@ class Utilisateur
         }
     }
 
-    /**
-     * Methode permettant de récupérer le nom des entreprises selon l'id
-     * 
-     * @param string $choix_entreprise Id de l'entreprise de l'utilisateur
-     * 
-     * @return array Tableau associatif contenant les infos de l'entreprise
-     */
-    public static function getEntrepriseName(string $choix_entreprise): string
-    {
-        try {
-            // Création d'un objet $db selon la classe PDO
-            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
-
-            // stockage de ma requete dans une variable
-            $sql = "SELECT `nom_entreprise` FROM `entreprise` WHERE `id_entreprise` = :id_entreprise";
-
-            // je prepare ma requête pour éviter les injections SQL
-            $query = $db->prepare($sql);
-
-            // on relie les paramètres à nos marqueurs nominatifs à l'aide d'un bindValue
-            $query->bindValue(':id_entreprise', $choix_entreprise, PDO::PARAM_STR);
-
-            // on execute la requête
-            $query->execute();
-
-            // on récupère le résultat de la requête dans une variable
-            $result = $query->fetch(PDO::FETCH_ASSOC);
-
-            // on retourne le résultat
-            return $result['nom_entreprise'];
-        } catch (PDOException $e) {
-            echo 'Erreur : ' . $e->getMessage();
-            die();
-        }
-    }
-
     public static function updateUserProfile($utilisateur_id, $nomEntreprise, $pseudo, $nom, $prenom, $adresseMail, $dateNaissance, $user_description)
     {
         try {
@@ -245,4 +209,23 @@ class Utilisateur
             die();
         }
     }
+
+    public static function getUserPicture($utilisateur_id) {
+        try {
+            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
+
+            $sql = "SELECT photo_participant FROM utilisateur WHERE id_utilisateur = :id_utilisateur;";
+            $query = $db->prepare($sql);
+            $query->bindParam(":id_utilisateur", $utilisateur_id, PDO::PARAM_INT);
+            $query->execute();
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return isset($result['image_path']) ? $result['image_path'] : '/pexels-fwstudio-172289.jpg';
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
+
 }
