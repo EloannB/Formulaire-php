@@ -6,13 +6,14 @@ session_start();
 // Inclure la configuration et les modèles nécessaires
 require_once "../config.php";
 require_once "../models/Utilisateur.php";
+require_once "../models/Trajet.php";
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
     header('Location: controller-signin.php');
     exit();
 }
-
+var_dump($_POST);
 // Vérifier si le formulaire de mise à jour a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user']['id_utilisateur'];
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifier si l'image est réellement une image
     if (isset($_FILES["profile_image"]) && $_FILES["profile_image"]["error"] == 0) {
-        $target_dir = "uploads/";
+        $target_dir = "../assets/uploads/";
         $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -53,4 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Rediriger vers la page de profil
 header('Location: controller-profil.php');
 exit();
-?>
+
+include_once '../views/view-profil.php';

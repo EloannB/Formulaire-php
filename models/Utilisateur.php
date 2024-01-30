@@ -207,18 +207,18 @@ class Utilisateur
         try {
             $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
 
-            $sql = "UPDATE utilisateur SET id_entreprise = :nomEntreprise, pseudo_participant = :pseudo, nom_participant = :nom, prenom_participant = :prenom, mail_participant = :adresseMail, naissance_participant = :dateNaissance, user_description = :user_description WHERE id_utilisateur = :utilisateur_id";
+            $sql = "UPDATE utilisateur SET id_entreprise = :nomEntreprise, pseudo_participant = :pseudo, nom_participant = :nom, prenom_participant = :prenom, mail_participant = :adresseMail, naissance_participant = :dateNaissance, description_participant = :user_description WHERE id_utilisateur = :utilisateur_id";
 
             $query = $db->prepare($sql);
 
-            $query->bindParam(":id_entreprise", $nomEntreprise, PDO::PARAM_STR);
+            $query->bindParam(":nomEntreprise", $nomEntreprise, PDO::PARAM_STR);
             $query->bindParam(":pseudo", $pseudo, PDO::PARAM_STR);
             $query->bindParam(":nom", $nom, PDO::PARAM_STR);
             $query->bindParam(":prenom", $prenom, PDO::PARAM_STR);
             $query->bindParam(":adresseMail", $adresseMail, PDO::PARAM_STR);
             $query->bindParam(":dateNaissance", $dateNaissance, PDO::PARAM_STR);
             $query->bindParam(":user_description", $user_description, PDO::PARAM_STR);
-            $query->bindParam(":id_utilisateur", $utilisateur_id, PDO::PARAM_INT);
+            $query->bindParam(":utilisateur_id", $utilisateur_id, PDO::PARAM_INT);
 
             $query->execute();
         } catch (PDOException $e) {
@@ -232,7 +232,7 @@ class Utilisateur
         try {
             $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
 
-            $sql = "UPDATE utilisateur SET photo = :image_path WHERE id_utilisateur = :id_utilisateur";
+            $sql = "UPDATE utilisateur SET photo_participant = :image_path WHERE id_utilisateur = :id_utilisateur";
 
             $query = $db->prepare($sql);
 

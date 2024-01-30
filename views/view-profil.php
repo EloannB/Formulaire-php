@@ -18,21 +18,22 @@
     <div id="profil">
         <h1>Profil</h1>
 
-        <div id="profileInfo">
-            <p>Nom de l'Entreprise: <?php echo $_SESSION['user']['nom_entreprise']; ?></p>
-            <img src="<?php echo isset($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : '/pexels-fwstudio-172289.jpg'; ?>" alt="Photo de profil">
-            <p>Pseudo: <?php echo $_SESSION['user']['pseudo_participant']; ?></p>
-            <p>Nom: <?php echo $_SESSION['user']['nom_participant']; ?></p>
-            <p>Prénom: <?php echo $_SESSION['user']['prenom_participant']; ?></p>
-            <p>Adresse Mail: <?php echo $_SESSION['user']['mail_participant']; ?></p>
-            <p>Date de naissance: <?php echo $_SESSION['user']['naissance_participant']; ?></p>
-            <p>Description: <?php echo $_SESSION['user']['description_participant']; ?></p>
-            <a href="controller-home.php">Retour à l'accueil</a>
-            <button id="editProfileBtn">Modifier le profil</button>
+        <div id="profileInfo" class="user-profile">
+            <p class="profile-info-item">Nom de l'Entreprise: <?php echo $_SESSION['user']['nom_entreprise']; ?></p>
+            <img src="<?php echo isset($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : '/pexels-fwstudio-172289.jpg'; ?>" alt="Photo de profil" class="profile-image">
+            <p class="profile-info-item">Pseudo: <?php echo $_SESSION['user']['pseudo_participant']; ?></p>
+            <p class="profile-info-item">Nom: <?php echo $_SESSION['user']['nom_participant']; ?></p>
+            <p class="profile-info-item">Prénom: <?php echo $_SESSION['user']['prenom_participant']; ?></p>
+            <p class="profile-info-item">Adresse Mail: <?php echo $_SESSION['user']['mail_participant']; ?></p>
+            <p class="profile-info-item">Date de naissance: <?php echo $_SESSION['user']['naissance_participant']; ?></p>
+            <p class="profile-info-item">Description: <?php echo $_SESSION['user']['description_participant']; ?></p>
+            <a href="controller-home.php" class="profile-info-link">Retour à l'accueil</a>
+            <button id="editProfileBtn" class="profile-info-button">Modifier le profil</button>
         </div>
 
+
         <!-- Formulaire de mise à jour du profil -->
-        <form id="updateProfileForm" action="controller-update-profile.php" method="post" enctype="multipart/form-data">
+        <form id="updateProfileForm" action="controller-updateprofil.php" method="post" enctype="multipart/form-data">
             <label for="nom_entreprise" class="formul-label">Nom de l'Entreprise :</label>
             <input type="text" id="nom_entreprise" name="nom_entreprise" value="<?php echo $_SESSION['user']['nom_entreprise']; ?>" class="form-input">
 
