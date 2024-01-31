@@ -19,5 +19,20 @@ if (!isset($_SESSION['user'])) {
 $user = $_SESSION['user'];
 $trajetUtilisateur = $_SESSION['user']['id_utilisateur'] ? Trajet::getHistoriqueTrajet($_SESSION['user']['id_utilisateur']) : "Trajet non défini";
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $id_trajet = $_POST['id_trajet'];
+
+    // Convertir l'ID du trajet en entier
+    $id_trajet = intval($id_trajet);
+
+    // Appel à la fonction de suppression
+    Trajet::supprimerTrajet($id_trajet);
+
+    // Rafraîchir la page 
+    header('Location: controller-history.php');
+    exit();
+}
+
 // Inclure la page de vue History
 include_once '../views/view-history.php';

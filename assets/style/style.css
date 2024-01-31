@@ -380,7 +380,7 @@ input.form-input,
 }
 
 .date-trajet {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     color: #459900;
     margin-bottom: 8px;
@@ -389,7 +389,7 @@ input.form-input,
 .distance-trajet,
 .duree-trajet,
 .vehicule-trajet {
-    font-size: 16px;
+    font-size: 20px;
     color: #333;
     margin-bottom: 6px;
 }
@@ -447,4 +447,12 @@ color: rgb(148, 148, 148);
 
 .trajHistory {
 color: #000000;
+}
+
+button.btn-delete-trajet {
+
+    background-color: #d61111;
+    margin-left: 120px;
+    margin-right: 120px;
+    margin-top: 20px;
 }

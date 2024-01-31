@@ -33,7 +33,7 @@ class Trajet
             $query->bindValue(":date_trajet", $dateTrajet, PDO::PARAM_STR);
             $query->bindValue(":distance_trajet", $distanceParcourue, PDO::PARAM_STR);
             $query->bindValue(":temps_trajet", $dureeTrajet, PDO::PARAM_STR);
-            $query->bindValue(":photo_trajet", "image_trajet_par_defaut.jpg", PDO::PARAM_STR);
+            $query->bindValue(":photo_trajet", $imageTrajet, PDO::PARAM_STR);
             $query->bindValue(":id_vehicule", $idVehicule, PDO::PARAM_INT);
             $query->bindValue(":id_utilisateur", $idUtilisateur, PDO::PARAM_INT);
 
@@ -44,6 +44,38 @@ class Trajet
             die();
         }
     }
+
+    /** 
+     * Methode permettant de supprimer un trajet de la BDD 
+     * @param string $dateTrajet Date du trajet de l'utilisateur  
+     * @param string $distanceParcourue Distance parcourue par l'utilisateur 
+     * @param string $dureeTrajet Durée du trajet de l'utilisateur 
+     * @param string $imageTrajet Image du trajet de l'utilisateur ( optionnnel )
+     * @param int $idVehicule Identifiant du vehicule selectionné
+     * @param int $idUtilisateur identifiant de l'utilisateur   
+     * 
+     * @return void 
+     */
+
+     public static function supprimerTrajet(int $id_trajet): void
+{
+    try {
+        // Création d'un objet $db selon la classe PDO
+        $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
+
+        $sql = "DELETE FROM `trajet` WHERE id_trajet = :id_trajet";
+
+        $query = $db->prepare($sql);
+
+        $query->bindParam(":id_trajet", $id_trajet, PDO::PARAM_INT);
+
+        // on execute la requête
+        $query->execute();
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        die();
+    }
+}   
 
     public static function getHistoriqueTrajet($idUtilisateur)
     {
