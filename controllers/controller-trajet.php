@@ -7,6 +7,7 @@ require_once "../config.php";
 // Models
 require_once "../models/Utilisateur.php";
 require_once "../models/Trajet.php";
+require_once "../models/Transport.php";
 
 $showform = true;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

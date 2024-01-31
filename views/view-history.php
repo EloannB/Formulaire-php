@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a href="controller-home.php" id="arrowleft"><i class="bi bi-arrow-left-circle"></i></a>
+
     <h1 class="trajHistory">Historique des trajets :</h1>
 
     <?php
@@ -28,7 +28,7 @@
                 <!-- Formulaire de suppression -->
                 <form action="controller-history.php" method="post">
                     <input type="hidden" name="id_trajet" value="<?= $trajet['id_trajet'] ?>">
-                    <button type="submit" class="btn-delete-trajet"><i class="bi bi-trash3-fill"></i></button>
+                    <button type="submit" class="btn-delete-trajet" onclick="return confirm('Voulez-vous vraiment supprimer ce trajet ?')"><i class="bi bi-trash3-fill"></i></button>
                 </form>
             </div>
     <?php endforeach;
@@ -37,6 +37,7 @@
     }
     ?>
 
+    <a href="controller-home.php" id="arrowleft"><i class="bi bi-arrow-left-circle"></i></a>
 </body>
 
 </html>

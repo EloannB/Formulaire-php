@@ -122,7 +122,7 @@ a.button:hover {
     margin: 115px auto;
     padding: 20px;
     text-align: center;
-    background-color: #f8f8f8;
+    background-color: rgba(255,255,255,0.9);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -197,7 +197,7 @@ a.button:hover {
     max-width: 600px;
     margin: 14px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -258,6 +258,29 @@ a.button:hover {
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#dateTrajet:focus {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#distanceParcourue:focus {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#dureeTrajet:focus {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#idVehicule:focus {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#imageTrajet:focus {
+    background-color: rgba(255, 255, 255, 1);
 }
 
 #idVehicule {
@@ -290,7 +313,7 @@ label#dateT,
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -299,7 +322,7 @@ label#dateT,
     display: block;
     margin-top: 10px;
     font-weight: bold;
-    color: #22b7e4;
+    color: #7691a8;
 }
 
 input.form-input,
@@ -356,17 +379,17 @@ input.form-input,
 .profile-info-link {
     display: block;
     margin-top: 15px;
-    color: #333;
+    color: #ffffff;
     text-decoration: none;
     font-weight: bold;
 }
 
 .profile-info-link:hover {
-    color: #555;
+    color: #bdbdbd;
 }
 
 .trajet {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     margin: 20px;
@@ -404,13 +427,13 @@ input.form-input,
 
 .no-trajet {
     font-style: italic;
-    color: #666;
+    color: #f2f2f2;
     margin-top: 20px;
 }
 
 #arrowleft {
     font-size: 30px;
-    color: #000000;
+    color: #ffffff;
 }
 
 #arrowleft:hover {
@@ -446,7 +469,7 @@ color: rgb(148, 148, 148);
 }
 
 .trajHistory {
-color: #000000;
+color: #ffffff;
 }
 
 button.btn-delete-trajet {
@@ -455,4 +478,8 @@ button.btn-delete-trajet {
     margin-left: 120px;
     margin-right: 120px;
     margin-top: 20px;
+}
+
+html {
+    background-image: url(https://images.pexels.com/photos/917510/pexels-photo-917510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
 }
