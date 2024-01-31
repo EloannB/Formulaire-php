@@ -2,7 +2,6 @@
 
 // Initialisation de la session
 session_start();
-
 // Inclure la configuration et les modèles nécessaires
 require_once "../config.php";
 require_once "../models/Utilisateur.php";

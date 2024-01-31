@@ -14,7 +14,7 @@
         <h1>Bonjour <?php echo $_SESSION['user']['pseudo_participant']; ?></h1>
         <p>Date du jour : <?php echo date('d/m/Y'); ?></p>
         <div class="user-info">
-            <img src="/pexels-fwstudio-172289.jpg" alt="Image de profil">
+        <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant']?>" alt="Photo de profil">
         </div>
         <button class="add-profil" onclick="location.href='controller-profil.php';">Voir le Profil</button>
         <a href="../controllers/controller-trajet.php"><button class="add-btn">Ajouter un trajet écologique</button></a>

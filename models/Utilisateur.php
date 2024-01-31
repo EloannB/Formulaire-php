@@ -191,37 +191,19 @@ class Utilisateur
         }
     }
 
-    public static function updateUserProfileImage($utilisateur_id, $image_path)
+    public static function updateUserProfileImage($utilisateur_id, $image_user)
     {
         try {
             $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
 
-            $sql = "UPDATE utilisateur SET photo_participant = :image_path WHERE id_utilisateur = :id_utilisateur";
+            $sql = "UPDATE utilisateur SET photo_participant = :image_user WHERE id_utilisateur = :id_utilisateur";
 
             $query = $db->prepare($sql);
 
-            $query->bindParam(":image_path", $image_path, PDO::PARAM_STR);
+            $query->bindParam(":image_user", $image_user, PDO::PARAM_STR);
             $query->bindParam(":id_utilisateur", $utilisateur_id, PDO::PARAM_INT);
 
             $query->execute();
-        } catch (PDOException $e) {
-            echo 'Erreur : ' . $e->getMessage();
-            die();
-        }
-    }
-
-    public static function getUserPicture($utilisateur_id) {
-        try {
-            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
-
-            $sql = "SELECT photo_participant FROM utilisateur WHERE id_utilisateur = :id_utilisateur;";
-            $query = $db->prepare($sql);
-            $query->bindParam(":id_utilisateur", $utilisateur_id, PDO::PARAM_INT);
-            $query->execute();
-
-            $result = $query->fetch(PDO::FETCH_ASSOC);
-
-            return isset($result['image_path']) ? $result['image_path'] : '/pexels-fwstudio-172289.jpg';
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
             die();

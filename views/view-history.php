@@ -11,7 +11,7 @@
 
 <body>
     <a href="controller-home.php" id="arrowleft"><i class="bi bi-arrow-left-circle"></i></a>
-    <h1>Historique des trajets :</h1>
+    <h1 class="trajHistory">Historique des trajets :</h1>
     <?php
     // Vérifiez si l'historique contient des trajets
     if (!empty($trajetUtilisateur)) {
@@ -21,7 +21,7 @@
                 <p class="date-trajet">Date du trajet: <?= $trajet['date_fr'] ?></p>
                 <p class="distance-trajet">Distance parcourue: <?= $trajet['distance_trajet'] ?> km</p>
                 <p class="duree-trajet">Durée du trajet: <?= $trajet['temps_trajet'] ?></p>
-                <p class="vehicule-trajet">Véhicule: <?= $trajet['id_transport'] ?></p>
+                <p class="vehicule-trajet">Véhicule: <?= $trajet['type_transport'] ?></p>
                 <img class="photo-trajet" src="<?= $trajet['photo_trajet'] ?>" alt="Photo du trajet">
             </div>
     <?php endforeach;
