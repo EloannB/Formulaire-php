@@ -355,6 +355,10 @@ input.form-input,
     margin-left: 10px;
 }
 
+.cancelBtn:hover {
+    background-color: #a81a10;
+}
+
 .profile-image {
     display: block;
     max-width: 100%;

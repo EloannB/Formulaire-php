@@ -44,6 +44,7 @@
 
             <label for="pseudo" class="formul-label">Pseudo :</label>
             <input type="text" id="pseudo" name="pseudo" value="<?php echo $_SESSION['user']['pseudo_participant']; ?>" class="form-input">
+            <span class="error-message"><?php echo isset($pseudoError) ? $pseudoError : ''; ?></span>
 
             <label for="nom" class="formul-label">Nom :</label>
             <input type="text" id="nom" name="nom" value="<?php echo $_SESSION['user']['nom_participant']; ?>" class="form-input">
@@ -53,6 +54,7 @@
 
             <label for="adresse_mail" class="formul-label">Adresse Mail :</label>
             <input type="email" id="adresse_mail" name="adresse_mail" value="<?php echo $_SESSION['user']['mail_participant']; ?>" class="form-input">
+            <span class="error-message"><?php echo isset($emailError) ? $emailError : ''; ?></span>
 
             <label for="date_naissance" class="formul-label">Date de naissance :</label>
             <input type="date" id="date_naissance" name="date_naissance" value="<?php echo $_SESSION['user']['naissance_participant']; ?>" class="form-input">

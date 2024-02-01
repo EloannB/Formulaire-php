@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
     header('Location: controller-signin.php');
     exit();
 }
-var_dump($_POST);
+
 // Vérifier si le formulaire de mise à jour a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user']['id_utilisateur'];
@@ -26,6 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresseMail = $_POST['adresse_mail'];
     $dateNaissance = $_POST['date_naissance'];
     $description = $_POST['description'];
+
+    // Vérifier si l'adresse e-mail existe déjà
+    if (Utilisateur::checkMailExists($adresseMail) && $_SESSION['user']['mail_participant'] != $adresseMail) {
+        $emailError = 'L\'adresse e-mail existe déjà. Veuillez choisir une autre adresse.';
+    }
+
+    // Vérifier si le pseudo existe déjà
+    if (Utilisateur::checkPseudoExists($pseudo) && $_SESSION['user']['pseudo_participant'] != $pseudo) {
+        $pseudoError = 'Le pseudo existe déjà. Veuillez choisir un autre pseudo.';
+    }
 
     // Vérifier si l'image est réellement une image
     if (isset($_FILES["profile_image"]) && $_FILES["profile_image"]["error"] == 0) {
