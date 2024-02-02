@@ -20,7 +20,7 @@
 
         <div id="profileInfo" class="user-profile">
             <p class="profile-info-item">Nom de l'Entreprise: <?php echo $_SESSION['user']['nom_entreprise']; ?></p>
-            <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant']?>" alt="Photo de profil" class="profile-image">
+            <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant'] ?>" alt="Photo de profil" class="profile-image">
             <p class="profile-info-item">Pseudo: <?php echo $_SESSION['user']['pseudo_participant']; ?></p>
             <p class="profile-info-item">Nom: <?php echo $_SESSION['user']['nom_participant']; ?></p>
             <p class="profile-info-item">Prénom: <?php echo $_SESSION['user']['prenom_participant']; ?></p>
@@ -65,10 +65,15 @@
             <label for="profile_image" class="formul-label">Changer la photo de profil :</label>
             <input type="file" id="profile_image" name="profile_image" accept="image/*" class="form-input">
 
-            <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant']?>" alt="Photo de profil" class="profile-image">
+            <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant'] ?>" alt="Photo de profil" class="profile-image">
 
             <button type="submit" class="majBtn">Mettre à jour</button>
             <button type="button" class="cancelBtn" id="cancelBtn">Annuler</button>
+        </form>
+
+        <!-- Formulaire suppression du profil -->
+        <form action="controller-suppcompte.php" method="post">
+            <button class="supCompte" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')">Supprimer mon compte</button>
         </form>
 
     </div>

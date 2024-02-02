@@ -210,4 +210,20 @@ class Utilisateur
         }
     }
 
+    public static function supprimerCompte(int $user_id): void
+    {
+        try {
+            // Créer une connexion à la base de données
+            $db = new PDO("mysql:host=localhost;dbname=" . DBNAME, DBUSERNAME, DBPASSWORD);
+
+            // Supprimer l'utilisateur de la base de données
+            $sql = "DELETE FROM `utilisateur` WHERE `id_utilisateur` = :user_id";
+            $query = $db->prepare($sql);
+            $query->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+            $query->execute();
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
 }
