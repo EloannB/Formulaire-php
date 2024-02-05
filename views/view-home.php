@@ -14,12 +14,23 @@
         <h1>Bonjour <?php echo $_SESSION['user']['pseudo_participant']; ?></h1>
         <p>Date du jour : <?php echo date('d/m/Y'); ?></p>
         <div class="user-info">
-        <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant']?>" alt="Photo de profil">
+            <?php
+            // Vérifie si l'image de profil est définie
+            if (!empty($_SESSION['user']['photo_participant'])) {
+                $photoPath = "../assets/uploads/" . $_SESSION['user']['photo_participant'];
+            } else {
+                // Image par défaut si aucune image de profil n'est définie
+                $photoPath = "../imageDefaut.png";
+            }
+            ?>
+
+            <img src="<?= $photoPath ?>" alt="Photo de profil">
+
         </div>
         <button class="add-profil" onclick="location.href='controller-profil.php';">Voir le Profil</button>
         <a href="../controllers/controller-trajet.php"><button class="add-btn">Ajouter un trajet écologique</button></a>
         <a href="../controllers/controller-history.php"><button class="add-btn">Voir historique des trajets</button></a>
-        
+
         <!-- Ajouter le formulaire de déconnexion -->
         <form method="post" style="display:inline;">
             <input type="hidden" name="logout" value="1">

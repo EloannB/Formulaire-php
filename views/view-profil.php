@@ -20,7 +20,16 @@
 
         <div id="profileInfo" class="user-profile">
             <p class="profile-info-item">Nom de l'Entreprise: <?php echo $_SESSION['user']['nom_entreprise']; ?></p>
-            <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant'] ?>" alt="Photo de profil" class="profile-image">
+            <?php
+            // Vérifie si l'image de profil est définie
+            if (!empty($_SESSION['user']['photo_participant'])) {
+                $photoPath = "../assets/uploads/" . $_SESSION['user']['photo_participant'];
+            } else {
+                // Image par défaut si aucune image de profil n'est définie
+                $photoPath = "../imageDefaut.png";
+            }
+            ?>
+            <img src="<?= $photoPath ?>" alt="Photo de profil" class="profile-image">
             <p class="profile-info-item">Pseudo: <?php echo $_SESSION['user']['pseudo_participant']; ?></p>
             <p class="profile-info-item">Nom: <?php echo $_SESSION['user']['nom_participant']; ?></p>
             <p class="profile-info-item">Prénom: <?php echo $_SESSION['user']['prenom_participant']; ?></p>
@@ -65,7 +74,17 @@
             <label for="profile_image" class="formul-label">Changer la photo de profil :</label>
             <input type="file" id="profile_image" name="profile_image" accept="image/*" class="form-input">
 
-            <img src="../assets/uploads/<?= $_SESSION['user']['photo_participant'] ?>" alt="Photo de profil" class="profile-image">
+            <?php
+            // Vérifie si l'image de profil est définie
+            if (!empty($_SESSION['user']['photo_participant'])) {
+                $photoPath = "../assets/uploads/" . $_SESSION['user']['photo_participant'];
+            } else {
+                // Image par défaut si aucune image de profil n'est définie
+                $photoPath = "../imageDefaut.png";
+            }
+            ?>
+
+            <img src="<?= $photoPath ?>" alt="Photo de profil" class="profile-image">
 
             <button type="submit" class="majBtn">Mettre à jour</button>
             <button type="button" class="cancelBtn" id="cancelBtn">Annuler</button>
@@ -84,6 +103,12 @@
         const profileInfo = document.getElementById('profileInfo');
         const updateProfileForm = document.getElementById('updateProfileForm');
         const cancelUpdateBtn = document.getElementById('cancelBtn');
+
+        // Afficher le formulaire de modification si des erreurs sont présentes
+        if (<?= !empty($errors) ? 'true' : 'false' ?>) {
+                    document.getElementById('updateProfileForm').style.display = 'block';
+                    document.querySelector('profileInfo').style.display = 'none';
+                }
 
         // Ajoutez un gestionnaire d'événements pour le clic sur le bouton "Modifier le profil"
         editProfileBtn.addEventListener('click', () => {
