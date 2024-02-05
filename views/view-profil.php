@@ -44,7 +44,7 @@
 
             <label for="pseudo" class="formul-label">Pseudo :</label>
             <input type="text" id="pseudo" name="pseudo" value="<?php echo $_SESSION['user']['pseudo_participant']; ?>" class="form-input">
-            <span class="error-message"><?php echo isset($pseudoError) ? $pseudoError : ''; ?></span>
+            <p class="error"><?= $erreurs["pseudo"] ?? '' ?></p>
 
             <label for="nom" class="formul-label">Nom :</label>
             <input type="text" id="nom" name="nom" value="<?php echo $_SESSION['user']['nom_participant']; ?>" class="form-input">

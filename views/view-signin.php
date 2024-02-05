@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="formulaire">
+    <div id="formulaire" style="margin: 115px auto;">
         <form action="../controllers/controller-signin.php" method="post" novalidate>
             <h1>Veuillez vous connecter</h1>
             <div class="mb-3">

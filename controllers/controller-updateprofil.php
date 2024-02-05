@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($check === false) {
             $uploadOk = 0;
         }
-
+        var_dump($emailError);
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file)) {
                 // Mettre à jour le chemin de l'image dans la base de données
