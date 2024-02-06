@@ -42,7 +42,7 @@
 
 
         <!-- Formulaire de mise à jour du profil -->
-        <form id="updateProfileForm" action="controller-updateprofil.php" method="post" enctype="multipart/form-data">
+        <form id="updateProfileForm" action="controller-updateprofil.php" method="post" enctype="multipart/form-data" novalidate>
             <label for="choix_entreprise" class="formul-label">Nom de l'Entreprise :</label>
             <select id="choix_entreprise" name="choix_entreprise" class="select-input" required>
                 <option value="" disabled selected>Sélectionnez une entreprise</option>
@@ -50,23 +50,27 @@
                     <option value="<?= $entreprise['id_entreprise'] ?>" <?= isset($_SESSION['user']['id_entreprise']) && $_SESSION['user']['id_entreprise'] == $entreprise['id_entreprise'] ? 'selected' : '' ?>><?= $entreprise['nom_entreprise'] ?></option>
                 <?php } ?>
             </select>
+            <p class="error-message"><?= $errors["choix_entreprise"] ?? '' ?></p>
 
             <label for="pseudo" class="formul-label">Pseudo :</label>
             <input type="text" id="pseudo" name="pseudo" value="<?php echo $_SESSION['user']['pseudo_participant']; ?>" class="form-input">
-            <p class="error"><?= $erreurs["pseudo"] ?? '' ?></p>
+            <p class="error-message"><?= $errors["pseudo"] ?? '' ?></p>
 
             <label for="nom" class="formul-label">Nom :</label>
             <input type="text" id="nom" name="nom" value="<?php echo $_SESSION['user']['nom_participant']; ?>" class="form-input">
+            <p class="error-message"><?= $errors["nom"] ?? '' ?></p>
 
             <label for="prenom" class="formul-label">Prénom :</label>
             <input type="text" id="prenom" name="prenom" value="<?php echo $_SESSION['user']['prenom_participant']; ?>" class="form-input">
+            <p class="error-message"><?= $errors["prenom"] ?? '' ?></p>
 
             <label for="adresse_mail" class="formul-label">Adresse Mail :</label>
             <input type="email" id="adresse_mail" name="adresse_mail" value="<?php echo $_SESSION['user']['mail_participant']; ?>" class="form-input">
-            <span class="error-message"><?php echo isset($emailError) ? $emailError : ''; ?></span>
+            <p class="error-message"><?= $errors["adresse_mail"] ?? '' ?></p>
 
             <label for="date_naissance" class="formul-label">Date de naissance :</label>
             <input type="date" id="date_naissance" name="date_naissance" value="<?php echo $_SESSION['user']['naissance_participant']; ?>" class="form-input">
+            <p class="error-message"><?= $errors["date_naissance"] ?? '' ?></p>
 
             <label for="description" class="formul-label">Description :</label>
             <textarea id="description" name="description" class="form-textarea"><?php echo $_SESSION['user']['description_participant']; ?></textarea>
@@ -106,9 +110,9 @@
 
         // Afficher le formulaire de modification si des erreurs sont présentes
         if (<?= !empty($errors) ? 'true' : 'false' ?>) {
-                    document.getElementById('updateProfileForm').style.display = 'block';
-                    document.querySelector('profileInfo').style.display = 'none';
-                }
+            updateProfileForm.style.display = 'block';
+            profileInfo.style.display = 'none';
+        }
 
         // Ajoutez un gestionnaire d'événements pour le clic sur le bouton "Modifier le profil"
         editProfileBtn.addEventListener('click', () => {

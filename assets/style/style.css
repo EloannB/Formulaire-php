@@ -13,7 +13,7 @@ h1 {
     text-align: center;
     color: white;
     text-decoration: overline;
-    
+
 }
 
 form {
@@ -122,7 +122,7 @@ a.button:hover {
     margin: 115px auto;
     padding: 20px;
     text-align: center;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -169,7 +169,7 @@ a.button:hover {
     padding: 8px 12px;
     margin-top: 10px;
     border-radius: 4px;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 .logout-button:hover {
@@ -285,7 +285,7 @@ a.button:hover {
 }
 
 #idVehicule {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 #imageTrajet {
@@ -330,7 +330,7 @@ input.form-input,
 .form-textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 7px;
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -442,13 +442,13 @@ input.form-input,
 }
 
 #arrowleft:hover {
-color: rgb(148, 148, 148);
+    color: rgb(148, 148, 148);
 }
 
 .select-input {
     width: 100%;
-    padding: 12px; 
-    font-size: 14px; 
+    padding: 12px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -458,7 +458,7 @@ color: rgb(148, 148, 148);
 }
 
 .select-input option {
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 .select-input:hover,
@@ -474,7 +474,7 @@ color: rgb(148, 148, 148);
 }
 
 .trajHistory {
-color: #ffffff;
+    color: #ffffff;
 }
 
 button.btn-delete-trajet {
@@ -502,17 +502,22 @@ html {
     margin-right: 55px;
     margin-left: 55px;
     font-weight: bold;
-  }
-  
-  .supCompte:hover {
+}
+
+.supCompte:hover {
     background-color: #c82333;
-  }
-  
-  .supCompte:focus {
-    outline: none; 
+}
+
+.supCompte:focus {
+    outline: none;
     box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
-  }
-  
-  #dateTrajet {
-margin-top: 0 !important;
-  }
+}
+
+#dateTrajet {
+    margin-top: 0 !important;
+}
+
+p.error-message {
+    color: red !important;
+    margin-top: 0 !important;
+}

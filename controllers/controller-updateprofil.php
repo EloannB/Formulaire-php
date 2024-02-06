@@ -31,14 +31,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
 
     // Vérifier si l'adresse e-mail existe déjà
-    if (Utilisateur::checkMailExists($adresseMail) && $_SESSION['user']['mail_participant'] != $adresseMail) {
+
+    if (empty($adresseMail)) {
+        $errors["adresse_mail"] = "Adresse mail obligatoire";
+    } else if (!filter_var($adresseMail, FILTER_VALIDATE_EMAIL)) {
+        $errors["adresse_mail"] = "L'adresse e-mail est invalide.";
+    } else if (Utilisateur::checkMailExists($adresseMail) && $_SESSION['user']['mail_participant'] != $adresseMail) {
         $errors["adresse_mail"] = 'L\'adresse e-mail existe déjà. Veuillez choisir une autre adresse.';
     }
 
     // Vérifier si le pseudo existe déjà
-    if (Utilisateur::checkPseudoExists($pseudo) && $_SESSION['user']['pseudo_participant'] != $pseudo) {
+
+    if (empty($pseudo)) {
+        $errors["pseudo"] = "Pseudo obligatoire";
+    } else if (strlen($pseudo) < 4) {
+        $errors["pseudo"] = "Le pseudo est invalide. Il doit contenir au moins 4 caractères.";
+    } else if (Utilisateur::checkPseudoExists($pseudo) && $_SESSION['user']['pseudo_participant'] != $pseudo) {
         $errors["pseudo"] = 'Le pseudo existe déjà. Veuillez choisir un autre pseudo.';
     }
+
+    // Vérifier le nom
+    if (empty($nom)) {
+        $errors["nom"] = "Nom obligatoire";
+    } else if (!ctype_alpha($nom)) {
+        $errors["nom"] = "Le nom est invalide.";
+    }
+
+    // Vérifier le prénom
+    if (empty($prenom)) {
+        $errors["prenom"] = "Prénom obligatoire";
+    } else if (!ctype_alpha($prenom)) {
+        $errors["prenom"] = "Le prénom est invalide.";
+    };
 
     // Vérifier si l'image est réellement une image
     if (isset($_FILES["profile_image"]) && $_FILES["profile_image"]["error"] == 0) {
@@ -52,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($check === false) {
             $uploadOk = 0;
         }
-        var_dump($emailError);
+        
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file)) {
                 // Mettre à jour le chemin de l'image dans la base de données
@@ -60,14 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-    var_dump($errors);
+   
     if (empty($errors)) {
 
         // Mettre à jour les informations du profil
         Utilisateur::updateUserProfile($user_id, $nomEntreprise, $pseudo, $nom, $prenom, $adresseMail, $dateNaissance, $description);
 
         $_SESSION['user'] = Utilisateur::getInfos($adresseMail);
-    }
+    } 
 }
 
 // Rediriger vers la page de profil
