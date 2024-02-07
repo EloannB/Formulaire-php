@@ -68,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES["profile_image"]) && $_FILES["profile_image"]["error"] == 0) {
         $target_dir = "../assets/uploads/";
         $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
-        var_dump($target_file);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $new_file_name = 'image_' . $_SESSION["user"]["id_utilisateur"] . "." . $imageFileType;
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         $check = getimagesize($_FILES["profile_image"]["tmp_name"]);
         if ($check === false) {
@@ -78,9 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         if ($uploadOk == 1) {
-            if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file)) {
+            if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_dir . $new_file_name)) {
                 // Mettre à jour le chemin de l'image dans la base de données
-                Utilisateur::updateUserProfileImage($user_id, $_FILES["profile_image"]["name"]);
+                Utilisateur::updateUserProfileImage($user_id, $new_file_name);
             }
         }
     }
