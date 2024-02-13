@@ -53,7 +53,7 @@
             <div class='user-summary' style='border: 1px solid #ccc; padding: 20px; max-width: 400px;'>
                 <p style='color:green;'>Inscription réussie ! Un mail de confirmation a été envoyé.</p>
                 <div style='padding: 20px;'>
-                    <a href='../views/view-signin.php' class='button'>Connexion</a>
+                    <a href='../controllers/controller-signin.php' class='button'>Connexion</a>
                 </div>
             </div>
         </div>
