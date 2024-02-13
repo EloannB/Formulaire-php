@@ -71,7 +71,7 @@ button:hover {
 }
 
 p.error {
-    color: #ff9c4b;
+    color: #ffb01b;
     margin: 10px 0 15px;
     font-size: 16px;
 }
@@ -521,4 +521,9 @@ html {
 p.error-message {
     color: red !important;
     margin-top: 0 !important;
+}
+
+a#lienSignin {
+    color: #98d5fd;
+    text-decoration: none;
 }

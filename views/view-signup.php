@@ -42,6 +42,9 @@
                 </label>
                 <p class="error"><?= $erreurs["cgu"] ?? '' ?></p>
                 <button type="submit">S'enregistrer</button>
+                <div class="text-center">
+                <p>Vous avez déjà un compte ? <a href="../controllers/controller-signin.php">Connectez-vous</a></p>
+            </div>
             </form>
         </div>
     <?php } else { ?>

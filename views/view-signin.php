@@ -25,12 +25,16 @@
             <div class="text-center" style="padding-bottom: 20px">
                 <a href="">Mot de passe oublié</a>
             </div>
+            <div class="g-recaptcha" data-sitekey="6Le6NHEpAAAAADuMqGEEgF3r1moZb4SlSR4kmz_Q" style="justify-content: center; align-items: center; display: flex;"></div>
+                <span class="error" style="display: flex; justify-content: center; margin-top: 10px; color: #ffb01b; margin: 10px 0 15px;"><?= $erreurs["g-recaptcha-response"] ?? '' ?></span>
             <button type="submit">Connexion</button>
             <div class="text-center">
                 <p>Pas encore inscris ? <a href="../controllers/controller-signup.php">Inscrivez-vous</a></p>
             </div>
         </form>
     </div>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($choix_entreprise)) {
         $erreurs["choix_entreprise"] = "Veuillez choisir une entreprise";
     }
+
     // Si il n'y a pas d'erreurs
     if (empty($erreurs)) {
 
