@@ -53,7 +53,7 @@
             <div class='user-summary' style='border: 1px solid #ccc; padding: 20px; max-width: 400px;'>
                 <p style='color:green;'>Trajet enregistré avec succès !</p>
                 <div style='padding: 20px;'>
-                    <a href='../controllers/controller-profil.php' class='button'>Retour au profil</a>
+                    <a href='../controllers/controller-history.php' class='button'>Voir trajet(s)</a>
                 </div>
             </div>
         </div>
