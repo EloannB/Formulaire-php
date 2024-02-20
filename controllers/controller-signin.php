@@ -39,17 +39,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($erreurs)) {
         $courriel = htmlspecialchars($_POST['courriel']);
         $mot_de_passe = htmlspecialchars($_POST['mot_de_passe']);
-
+    
         if (Utilisateur::checkMailExists($courriel)) {
             $utilisateurInfos = Utilisateur::getInfos($courriel);
+    
+            if ($utilisateurInfos['valide_participant'] == 0) {
+                echo "<div style='display: flex; align-items: center; justify-content: center; height: 100vh;'>
+                <div class='user-summary' style='border: 1px solid #ccc; padding: 20px; max-width: 400px;'>
+                    <p style='color:red;'>Votre compte a été banni, veuillez contacter un administrateur.</p>
+                    <a href='../controllers/controller-signin.php'><button class='cancelBtn'>Retour</button></a>
+                </div>
+            </div>";
 
-            // On vérifie le mot de passe
-            if (password_verify($mot_de_passe, $utilisateurInfos['mdp_participant'])) {
-                $_SESSION['user'] = $utilisateurInfos;
-                header('Location: controller-home.php');
-                exit(); // Assurez-vous de terminer le script après une redirection
             } else {
-                $erreurs['mot_de_passe'] = "Mot de passe incorrect.";
+                // On vérifie le mot de passe
+                if (password_verify($mot_de_passe, $utilisateurInfos['mdp_participant'])) {
+                    $_SESSION['user'] = $utilisateurInfos;
+                    header('Location: controller-home.php');
+                    exit(); // Assurez-vous de terminer le script après une redirection
+                } else {
+                    $erreurs['mot_de_passe'] = "Mot de passe incorrect.";
+                }
             }
         } else {
             $erreurs['courriel'] = "Adresse mail incorrecte.";
@@ -57,9 +67,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 }
-
-
-
-
 
 include_once '../views/view-signin.php';
